@@ -17,6 +17,9 @@ exports.launchTest = async (pageUrl, codePath) => {
             height: 1080
         }
     })
+    
+    console.info('Is this path to the test code correct? -- ', file_path)
+
     const page = await browser.newPage()
 
     await page.goto(pageUrl, { waitUntil: 'domcontentloaded' })
