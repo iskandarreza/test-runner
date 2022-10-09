@@ -1,6 +1,6 @@
 {
   "name": "@iskandarreza/test-runner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Starts a Chromium instance to run custom js test code after navigating to a specified URL ",
   "main": "index.js",
   "scripts": {
