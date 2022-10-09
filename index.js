@@ -8,6 +8,23 @@ const defaultConfig = {
     codePath: `${path.join(__dirname, 'example/invert.js')}`
 }
 
+/**
+ * It takes a config object, and if the config object has a pageUrl and codePath property, it will
+ * launch a browser, navigate to the pageUrl, and evaluate the code in the file at the codePath.
+ * 
+ * The codePath is relative to the root of the project.
+ * 
+ * The values from the defaultConfig object is used if the config object is missing either the pageUrl or codePath
+ * property.
+ * 
+ * The defaultConfig object is defined as follows:
+ * 
+ * const defaultConfig = {
+ *     pageUrl: 'file:///Users/Izzy/Desktop/test.html',
+ *     codePath: '/Users/Izzy/Desktop/test.js'
+ * }
+ * @param {object} config - configuration object 
+ */
 exports.launchTest = async (config) => {
 
     console.info('INFO: Current config:')
