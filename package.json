@@ -1,0 +1,23 @@
+{
+  "name": "test-runner",
+  "version": "1.0.0",
+  "description": "Starts a Chromium instance to run custom js test code after navigating to a specified URL ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node example/start.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iskandarreza/test-runner.git"
+  },
+  "keywords": [],
+  "author": "Iskandar Reza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iskandarreza/test-runner/issues"
+  },
+  "homepage": "https://github.com/iskandarreza/test-runner#readme",
+  "devDependencies": {
+    "puppeteer": "^18.2.1"
+  }
+}
