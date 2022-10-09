@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const appRoot = require('app-root-path');
 const path = require('path')
 const fs = require('fs')
 
@@ -8,7 +9,8 @@ const fs = require('fs')
  * @param {string} codePath - The path to the file that contains the code you want to run.
  */
 exports.launchTest = async (pageUrl, codePath) => {
-    const file_path = `${path.join(__dirname, codePath)}`
+    // const file_path = `${path.join(__dirname, codePath)}`
+    const file_path = `${appRoot + codePath}`
     const file_content = fs.existsSync(file_path) ? fs.readFileSync(file_path, 'utf8') : ''
     const browser = await puppeteer.launch({
         headless: false, slowMo: 250, args: ['--window-size=1920,1080', '--allow-file-access-from-files'],

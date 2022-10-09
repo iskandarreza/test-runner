@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/iskandarreza/test-runner#readme",
   "dependencies": {
+    "app-root-path": "^3.1.0",
     "puppeteer": "^18.2.1"
   }
 }
