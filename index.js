@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs')
 
 const defaultConfig = {
-    pageUrl: '',
+    pageUrl: 'https://visualstudio.microsoft.com/',
     codePath: `${path.join(__dirname, 'example/invert.js')}`
 }
 
