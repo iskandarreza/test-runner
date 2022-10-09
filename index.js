@@ -1,17 +1,45 @@
 const puppeteer = require('puppeteer')
-const appRoot = require('app-root-path');
+const appRoot = require('app-root-path')
+const path = require('path')
 const fs = require('fs')
 
-/**
- * Launch a browser, go to a page, and run a script on that page.
- * @param {string} pageUrl - The URL of the page you want to test.
- * @param {string} codePath - The absolute path to the file that contains the code you want to run.
- */
-exports.launchTest = async (pageUrl, codePath) => {
-    if(Array.from(codePath)[0] !== '/') {
-        codePath = '/' + codePath
+const defaultConfig = {
+    pageUrl: '',
+    codePath: `${path.join(__dirname, 'example/invert.js')}`
+}
+
+exports.launchTest = async (config) => {
+
+    console.info('INFO: Current config:')
+    console.info({pageUrl: config.pageUrl, codePath: config.codePath})
+    console.info('')
+
+    
+    if (!config?.pageUrl) {
+        console.warn('WARNING: pageUrl not provided, using defaults')    
+        config.pageUrl = defaultConfig.pageUrl
     }
-    const file_path = `${appRoot + codePath}`
+    if (!config?.codePath) {
+        console.warn('WARNING: codePath not provided, using defaults')    
+        config.codePath = defaultConfig.codePath
+    } 
+    console.info('')
+
+
+    let file_path = config.codePath
+
+    if (file_path !== defaultConfig.codePath) {
+
+        file_path = `${appRoot + '/' + config.codePath}`
+
+        if (Array.from(config.codePath)[0] !== '/') {
+            console.warn(`WARNING: Missing leading slash in code absolute path, pre-pending '/'`)
+            console.info('')
+            file_path = `${appRoot + '/' + config.codePath}`
+        }
+
+    } 
+
     const file_content = fs.existsSync(file_path) ? fs.readFileSync(file_path, 'utf8') : ''
     const browser = await puppeteer.launch({
         headless: false, slowMo: 250, 
@@ -27,11 +55,12 @@ exports.launchTest = async (pageUrl, codePath) => {
 
     const page = await browser.newPage()
 
-    await page.goto(pageUrl, { waitUntil: 'domcontentloaded' })
+    await page.goto(config.pageUrl, { waitUntil: 'domcontentloaded' })
     
     if (file_content.length <= 0) {
         console.info('INFO: file is empty. Is the path to the file correct?')
         console.info('Path: ', file_path )
+        console.info('')
     } else {
         await page.evaluate(((file_content) => {
             file_content
