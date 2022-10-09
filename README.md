@@ -1,16 +1,19 @@
 # Overview
 Simple script to launch a Chromium instance, navigate to a specific URL and then evaluate custom code. 
 
-Takes two params
-> @param {string} pageUrl - The URL of the page you want to test.
->
-> @param {string} codePath - The path to the file that contains the code you want to run.
+Installation: 
+```
+npm install "https://github.com/iskandarreza/test-runner" --save-dev
+```
 
 Usage example: 
 ```
-const testRunner = require('./index')
+const testRunner = require('@iskandarreza/test-runner')
 
-testRunner.launchTest('https://surefoot.me/', 'example/test-code.js')
+const config = {
+  pageUrl: 'https://github.com/iskandarreza/test-runner',
+  codePath: '/example/hello-alert.js'
+}
+
+testRunner.launchTest(config)
 ```
-
-Run `npm run test` to start the example
