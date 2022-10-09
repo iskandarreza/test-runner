@@ -17,7 +17,7 @@
     "url": "https://github.com/iskandarreza/test-runner/issues"
   },
   "homepage": "https://github.com/iskandarreza/test-runner#readme",
-  "devDependencies": {
+  "dependencies": {
     "puppeteer": "^18.2.1"
   }
 }
