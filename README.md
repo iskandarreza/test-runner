@@ -24,3 +24,6 @@ testRunner.launchTest(config)
 
 ### Background
 I made this so that I can live-preview code that I intend to inject later into a website to customize/add features via bookmarklets, greasemonkey scripts, a/b testing with remote code like Google Optimize, or directly pasting it into the developer tools console.
+
+### Dev Branch Roadmap
+Adding support for Mocha tests. The idea is to have a config property, `config.testDir`, that will point to a directory containing unit test spec files. 
