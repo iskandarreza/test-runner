@@ -2,7 +2,9 @@ const puppeteer = require('puppeteer')
 const appRoot = require('app-root-path')
 const path = require('path')
 const fs = require('fs')
-const md5 = require('md5');
+const md5 = require('md5')
+
+const { runTests } = require('./unit-testing/runner')
 
 const defaultConfig = {
     pageUrl: 'https://visualstudio.microsoft.com/',
@@ -139,3 +141,5 @@ const launch = async (config) => {
 
 
 exports.launchTest = launch
+
+exports.runTests = runTests
