@@ -17,3 +17,5 @@ const config = {
 
 testRunner.launchTest(config)
 ```
+
+Set `config.watchForChanges = true` if you want the browser to reload and re-evaluate the source code on changes (uses MD5 comparison to check for changes)
