@@ -1,8 +1,8 @@
-const testRunner = require('../index')
+const testRunner = require('../../index')
 
 const config = {
     pageUrl: 'https://github.com/iskandarreza/test-runner',
-    codePath: 'example/hello-alert.js'
+    codePath: 'examples/custom-code/hello-alert.js'
 }
 
 testRunner.launchTest(config)

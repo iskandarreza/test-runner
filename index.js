@@ -4,26 +4,17 @@ const path = require('path')
 const fs = require('fs')
 const md5 = require('md5')
 
-const { runTests } = require('./unit-testing/runner')
+// const { runTests } = require('./unit-testing/runner')
+
+const { options } = require('./puppeteer.options')
+const { checkLeadingSlash } = require('./libs/check-leading-slash')
+const { runTests } = require('./libs/run-mocha-tests')
+
 
 const defaultConfig = {
     pageUrl: 'https://visualstudio.microsoft.com/',
-    codePath: `${path.join(__dirname, 'example/invert.js')}`,
+    codePath: `${path.join(__dirname, 'examples/custom-code/invert.js')}`,
     watchForChanges: false
-}
-
-/**
- * If the first character of the file path is not a forward slash, then prepend the file path with a
- * forward slash.
- * @param {string} FILE_PATH - The path to the file you want to read.
- * @returns {string} the value of the function call.
- */
-const checkLeadingSlash = (FILE_PATH) => {
-    if (Array.from(FILE_PATH)[0] !== '/') {
-        console.warn(`WARNING: Missing leading slash in code absolute path, pre-pending '/'`)
-        console.info('')
-        return `${appRoot + '/' + FILE_PATH}`
-    }
 }
 
 const FILE_CONTENT = (FILE_PATH) => fs.existsSync(FILE_PATH) ? fs.readFileSync(FILE_PATH, 'utf8') : ''
@@ -78,19 +69,7 @@ const launch = async (config) => {
 
     let _FILE_CONTENT = FILE_CONTENT(FILE_PATH)
     
-
-    // Start browser instance and navigate to given URL
-    const browser = await puppeteer.launch({
-        headless: false, slowMo: 250, 
-        args: [
-            '--window-size=1920,1080', 
-            '--allow-file-access-from-files'
-        ],
-        defaultViewport: {
-            width: 1920,
-            height: 1080
-        }
-    })
+    const browser = await puppeteer.launch(options)
 
     const page = await browser.newPage()
 
@@ -137,9 +116,12 @@ const launch = async (config) => {
             }
         })
     }
+
+
 }
 
 
 exports.launchTest = launch
 
 exports.runTests = runTests
+

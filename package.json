@@ -1,10 +1,12 @@
 {
   "name": "@iskandarreza/test-runner",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Starts a Chromium instance to run custom js test code after navigating to a specified URL ",
   "main": "index.js",
   "scripts": {
-    "test": "node example/usage.js"
+    "launch:basic": "node examples/scripts/basic-launcher.js",
+    "launch:tests": "node examples/scripts/test-launcher.js"
+
   },
   "repository": {
     "type": "git",

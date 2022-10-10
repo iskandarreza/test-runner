@@ -1,3 +1,4 @@
+const appRoot = require('app-root-path')
 const Mocha = require('mocha')
 const fs = require('fs')
 const path = require('path')
@@ -5,10 +6,14 @@ const path = require('path')
 // Instantiate a Mocha instance.
 const mocha = new Mocha()
 
-const testDir = `${path.join(__dirname, 'test-specs')}`
+const defaultTestDir = `${appRoot + '/spec'}`
 
-const runTests = () => {
-    mocha.addFile(`${path.join(__dirname, 'bootstrap.js')}`)
+const runTests = (testDir) => {
+    mocha.addFile(`${path.join(__dirname, '../unit-testing/bootstrap.js')}`)
+
+    if (!testDir) {
+        testDir = defaultTestDir
+    }
 
     // Add each .js file to the mocha instance
     fs.readdirSync(testDir).filter(function (file) {

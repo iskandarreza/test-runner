@@ -25,8 +25,6 @@ describe('sample test 2', function () {
         heading = await page.$eval(HEADING_SELECTOR, heading => heading.innerText)
 
         expect(heading).to.include('make software')
-        await page.screenshot({ path: 'screenshot2.png' })
-
     })
 
 })
