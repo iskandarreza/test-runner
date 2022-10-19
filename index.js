@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const playwright = require('playwright')
 const appRoot = require('app-root-path')
 const path = require('path')
 const fs = require('fs')
@@ -78,19 +79,16 @@ const launch = async (config) => {
     
 
     // Start browser instance and navigate to given URL
-    const browser = await puppeteer.launch({
-        headless: false, slowMo: 250, 
-        args: [
-            '--window-size=1920,1080', 
-            '--allow-file-access-from-files'
-        ],
-        defaultViewport: {
-            width: 1920,
-            height: 1080
-        }
-    })
+    const defaultViewport = {
+        width: 1920,
+        height: 1080
+    }
 
-    const page = await browser.newPage()
+    const browser = await playwright.webkit.launch({headless: false, slowMo: 250})
+
+    const context = await browser.newContext({viewport: defaultViewport, screen: defaultViewport})
+
+    const page = await context.newPage()
 
     await page.goto(config.pageUrl, { waitUntil: 'domcontentloaded' })
     
@@ -104,7 +102,7 @@ const launch = async (config) => {
         await page.evaluate(((CODE_TO_EVAL) => {
             CODE_TO_EVAL
         }, _FILE_CONTENT))
-        .then(() => { console.info('INFO: code was evaluated')})
+        // .then(() => { console.info('INFO: code was evaluated')})
     }
 
     // Reload the page if the code source file changes 
